@@ -45,7 +45,60 @@ To enable RBAC for this policy, include a `conditions` object as follows:
 `group_ids` and `user_ids` can be empty arrays.
 If both are empty arrays, the policy will deny access to all users and groups.
 
-Specifying RBAC settings is not supported when using the CSV format.
+Other conditions can be specified in a similar fashion.
+The following is a complete example of the `conditions` field, with all options for all conditions enabled:
+
+```json
+"conditions": {
+    "rbac": {
+        "enabled": true,
+        "group_ids": [28, 29, 30],
+        "user_ids": [247, 45, 46]
+    },
+    "screen_lock": {
+        "enabled": true
+    },
+    "firewall_required": {
+        "enabled": true
+    },
+    "block_jailbroken_device": {
+        "enabled": true
+    },
+    "disk_encryption": {
+        "enabled": true
+    },
+    "minimum_app_version": {
+        "enabled": true,
+        "minimum_app_version": "0.20.44888"
+    },
+    "minimum_os_version": {
+        "enabled": true,
+        "platforms": {
+            "android": {
+                "version": "8.0.0"
+            },
+            "ios": {
+                "version": "10.0.0"
+            },
+            "macos": {
+                "version": "10.15.0"
+            },
+            "windows": {
+                "version": "10.0.0"
+            }
+        }
+    },
+    "reauth_required": {
+        "enabled": true,
+        "session_period": "15i"
+    }
+}
+```
+
+For `reauth_required`, `session_period` should be a number followed by a letter representing the unit:
+`m` for months, `w` for weeks, `d` for days, `h` for hours and `i` for minutes.
+
+Specifying condition settings is not supported when using the CSV format.
 
 ## File examples
 
